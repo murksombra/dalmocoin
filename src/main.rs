@@ -7,7 +7,7 @@ fn main() {
         vec![0; 32],
         68496,
         "Genesis Block".to_owned(),
-        0x0000ffffffffffffffffffffffffffff,
+        0x0000ffffffffffffffffffffffffffff, //difficulty, as we add more zeros, more difficult to mine
     );
     block.hash = block.hash();
     println!("{:?}", &block);
