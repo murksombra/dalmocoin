@@ -1,16 +1,22 @@
 use dalmocoinlib::*;
 
 fn main() {
-    let mut block = Block::new(
-        0,
-        0,
-        vec![0; 32],
-        68496,
-        "Genesis Block".to_owned(),
-        0x0000ffffffffffffffffffffffffffff, //difficulty, as we add more zeros, more difficult to mine
-    );
-    block.hash = block.hash();
-    println!("{:?}", &block);
-    // block.mine();
-    // println!("{:?}", &block);
+    let difficulty = 0x0000ffffffffffffffffffffffffffff; //difficulty, as we add more zeros, more difficult to mine
+    let mut block = Block::new(0, 0, vec![0; 32], 0, "Genesis Block".to_owned(), difficulty);
+    block.mine();
+    println!("Mined genesis block {:?}", &block);
+
+    let mut last_hash = block.hash.clone();
+
+    let mut blockchain = Blockchain {
+        blocks: vec![block],
+    };
+    for i in 1..=10 {
+        let mut block = Block::new(i, 0, last_hash, 0, "Another block".to_owned(), difficulty);
+        block.mine();
+        println!("Mined block {:?}", &block);
+
+        last_hash = block.hash.clone();
+        blockchain.blocks.push(block);
+    }
 }
