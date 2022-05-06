@@ -2,7 +2,14 @@ use dalmocoinlib::*;
 
 fn main() {
     let difficulty = 0x0000ffffffffffffffffffffffffffff; //difficulty, as we add more zeros, more difficult to mine
-    let mut block = Block::new(0, 0, vec![0; 32], 0, "Genesis Block".to_owned(), difficulty);
+    let mut block = Block::new(
+        0,
+        now(),
+        vec![0; 32],
+        0,
+        "Genesis Block".to_owned(),
+        difficulty,
+    );
     block.mine();
     println!("Mined genesis block {:?}", &block);
 
@@ -12,7 +19,14 @@ fn main() {
         blocks: vec![block],
     };
     for i in 1..=10 {
-        let mut block = Block::new(i, 0, last_hash, 0, "Another block".to_owned(), difficulty);
+        let mut block = Block::new(
+            i,
+            now(),
+            last_hash,
+            0,
+            "Another block".to_owned(),
+            difficulty,
+        );
         block.mine();
         println!("Mined block {:?}", &block);
 

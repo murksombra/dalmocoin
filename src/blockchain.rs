@@ -13,6 +13,19 @@ impl Blockchain {
             } else if !block::check_difficulty(&block.hash(), block.difficulty) {
                 println!("Difficulty verification failed");
                 return false;
+            } else if i != 0 {
+                //no genesis block
+                let prev_block = &self.blocks[i - 1];
+                if block.timestamp <= prev_block.timestamp {
+                    println!("Time did not increase");
+                    return false;
+                }
+            } else {
+                //Genesis block
+                if block.previous_block_hash != vec![0; 32] {
+                    println!("Genesis block prev_block_invalid");
+                    return false;
+                }
             }
         }
         true
