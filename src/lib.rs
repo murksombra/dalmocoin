@@ -81,5 +81,5 @@ pub use crate::hashable::Hashable;
 mod blockchain;
 pub use crate::blockchain::Blockchain;
 
-mod transaction;
+pub mod transaction;
 pub use crate::transaction::Transaction;
