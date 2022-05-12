@@ -24,6 +24,9 @@ impl Transaction {
     pub fn input_value(&self) -> u64 {
         self.inputs.iter().map(|input| input.value).sum()
     }
+    pub fn output_value(&self) -> u64 {
+        self.outputs.iter().map(|output| output.value).sum()
+    }
 }
 impl Hashable for Transaction {
     fn bytes(&self) -> Vec<u8> {
