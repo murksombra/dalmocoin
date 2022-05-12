@@ -20,6 +20,11 @@ pub struct Transaction {
     pub outputs: Vec<Output>,
 }
 
+impl Transaction {
+    pub fn input_value(&self) -> u64 {
+        self.inputs.iter().map(|input| input.value).sum()
+    }
+}
 impl Hashable for Transaction {
     fn bytes(&self) -> Vec<u8> {
         let mut bytes = vec![];
