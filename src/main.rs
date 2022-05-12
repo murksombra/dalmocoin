@@ -23,27 +23,8 @@ fn main() {
     );
     genesis.mine();
     println!("Mined genesis block {:?}", &genesis);
-
-    let mut last_hash = genesis.hash.clone();
-
-    let mut blockchain = Blockchain {
-        blocks: vec![genesis],
-    };
-    for i in 1..=10 {
-        let mut block = Block::new(
-            i,
-            now(),
-            last_hash,
-            0,
-            "Another block".to_owned(),
-            difficulty,
-        );
-        block.mine();
-        println!("Mined block {:?}", &block);
-
-        last_hash = block.hash.clone();
-        blockchain.blocks.push(block);
-
-        // println!("Verify: {}", &blockchain.update(block)());
-    }
+    let mut blockchain = Blockchain::new();
+    blockchain
+        .update(genesis)
+        .expect("Failed like there's no tomorrow");
 }
