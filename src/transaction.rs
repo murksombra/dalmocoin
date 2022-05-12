@@ -29,6 +29,12 @@ impl Hashable for Transaction {
                 .flat_map(|input| input.bytes())
                 .collect::<Vec<u8>>(),
         );
+        bytes.extend(
+            self.outputs
+                .iter()
+                .flat_map(|output| output.bytes())
+                .collect::<Vec<u8>>(),
+        );
         bytes
     }
 }
