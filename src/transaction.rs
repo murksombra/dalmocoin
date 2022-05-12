@@ -19,3 +19,16 @@ pub struct Transaction {
     pub inputs: Vec<Output>,
     pub outputs: Vec<Output>,
 }
+
+impl Hashable for Transaction {
+    fn bytes(&self) -> Vec<u8> {
+        let mut bytes = vec![];
+        bytes.extend(
+            self.inputs
+                .iter()
+                .flat_map(|input| input.bytes())
+                .collect::<Vec<u8>>(),
+        );
+        bytes
+    }
+}
