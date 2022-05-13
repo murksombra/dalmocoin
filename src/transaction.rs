@@ -1,6 +1,7 @@
 use super::*;
 use std::collections::HashSet;
 
+#[derive(Clone)] // only if everybody in the struct is clonable
 pub struct Output {
     pub destination: Address,
     pub value: u64,
